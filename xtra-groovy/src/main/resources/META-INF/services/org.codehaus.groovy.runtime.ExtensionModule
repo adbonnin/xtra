@@ -1,0 +1,12 @@
+moduleName = xtra-module
+moduleVersion = 1.0
+
+extensionClasses = \
+  fr.adbonnin.xtra.groovy.base.XtraDatesExtension, \
+  fr.adbonnin.xtra.groovy.base.XtraStringsExtension, \
+  fr.adbonnin.xtra.groovy.collect.XtraCollectionExtension, \
+  fr.adbonnin.xtra.groovy.collect.XtraIteratorsExtension, \
+  fr.adbonnin.xtra.groovy.io.XtraFilesExtension
+
+staticExtensionClasses = \
+  fr.adbonnin.xtra.groovy.io.XtraFilesStaticExtension

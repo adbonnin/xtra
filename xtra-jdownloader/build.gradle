@@ -1,0 +1,21 @@
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile project(':xtra')
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
+
+    // Test dependencies
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'cglib:cglib-nodep:3.2.6'
+    testCompile 'org.objenesis:objenesis:2.6'
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
