@@ -1,9 +1,0 @@
-
-allprojects {
-    group = 'fr.adbonnin.xtra'
-    version = '1.0'
-}
-
-subprojects {
-    apply plugin: 'idea'
-}

@@ -4,5 +4,5 @@
 out/
 *.iml
 
-### Gradle #### Gradle
-.gradle
+### Maven
+target/

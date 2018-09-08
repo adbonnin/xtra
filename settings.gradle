@@ -1,4 +1,0 @@
-rootProject.name = 'xtra-parent'
-
-include 'xtra', 'xtra-jcommander', 'xtra-webclient', 'xtra-jdownloader', 'xtra-groovy', 'xtra-webclient-groovy'
-
