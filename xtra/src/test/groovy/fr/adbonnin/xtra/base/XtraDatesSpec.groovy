@@ -15,15 +15,15 @@ class XtraDatesSpec extends Specification {
         calendar.timeInMillis == date.time
     }
 
-    def "should create date from pattern"() {
+    def "should create date from str"() {
         when:
         def date = XtraDates.newDate(dateStr)
-        def expectedCal = date.toCalendar()
+        def calendar = date.toCalendar()
 
         then:
-        expectedCal.get(Calendar.YEAR) == expectedYear
-        expectedCal.get(Calendar.MONTH) == expectedMonth
-        expectedCal.get(Calendar.DAY_OF_MONTH) == expectedDayOfMonth
+        calendar.get(Calendar.YEAR) == expectedYear
+        calendar.get(Calendar.MONTH) == expectedMonth
+        calendar.get(Calendar.DAY_OF_MONTH) == expectedDayOfMonth
 
         where:
         dateStr = '2018-09-08'
@@ -31,6 +31,32 @@ class XtraDatesSpec extends Specification {
         expectedYear = 2018
         expectedMonth = Calendar.SEPTEMBER
         expectedDayOfMonth = 8
+    }
+
+    def "should create date time from str"() {
+        when:
+        def dateTime = XtraDates.newDateTime(dateTimeStr)
+        def calendar = dateTime.toCalendar()
+
+        then:
+        calendar.get(Calendar.YEAR) == expectedYear
+        calendar.get(Calendar.MONTH) == expectedMonth
+        calendar.get(Calendar.DAY_OF_MONTH) == expectedDayOfMonth
+
+        calendar.get(Calendar.HOUR_OF_DAY) == expectedHour
+        calendar.get(Calendar.MINUTE) == expectedMinutes
+        calendar.get(Calendar.SECOND) == expectedSeconds
+
+        where:
+        dateTimeStr = '2018-09-08 15:26:37'
+
+        expectedYear = 2018
+        expectedMonth = Calendar.SEPTEMBER
+        expectedDayOfMonth = 8
+
+        expectedHour = 15
+        expectedMinutes = 26
+        expectedSeconds = 37
     }
 
     def "should create new date"() {

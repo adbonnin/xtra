@@ -21,6 +21,8 @@ public final class XtraDates {
 
     public static final String DATE_PATTERN = "yyyy-MM-dd";
 
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
     public static String format(Date date, String pattern) {
         return new SimpleDateFormat(pattern).format(date);
     }
@@ -33,15 +35,37 @@ public final class XtraDates {
         return parse(str, pattern, locale, null);
     }
 
-    public static Date parse(String str, String pattern, Date nullDefault) {
-        return parse(str, pattern, null, nullDefault);
+    public static Date parse(String str, String pattern, Date defaultDate) {
+        return parse(str, pattern, null, defaultDate);
     }
 
-    public static Date parse(String str, String pattern, Locale locale, Date nullDefault) {
+    public static Date parse(String str, String pattern, Locale locale, Date defaultDate) {
 
-        if (str == null) {
-            return nullDefault;
+        if (str == null || pattern == null) {
+            return defaultDate;
         }
+
+        try {
+            return newDate(str, pattern, locale);
+        }
+        catch (Throwable e) {
+            return defaultDate;
+        }
+    }
+
+    public static Date newDate(String str) {
+        return newDate(str, DATE_PATTERN);
+    }
+
+    public static Date newDateTime(String str) {
+        return newDate(str, DATE_TIME_PATTERN);
+    }
+
+    public static Date newDate(String str, String pattern) {
+        return newDate(str, pattern, null);
+    }
+
+    public static Date newDate(String str, String pattern, Locale locale) {
 
         if (locale == null) {
             locale = getDefaultFormatLocale();
@@ -51,21 +75,11 @@ public final class XtraDates {
             return new SimpleDateFormat(pattern, locale).parse(str);
         }
         catch (ParseException e) {
-            return nullDefault;
-        }
-    }
-
-    public static Date newDate(String str) {
-        final String pattern = DATE_PATTERN;
-
-        final Date date = parse(str, pattern);
-        if (date == null) {
             throw new IllegalArgumentException("Date can't be parsed; " +
                 "str: " + str + ", " +
-                "pattern: " + pattern);
+                "pattern: " + pattern + ", " +
+                "locale: " + locale, e);
         }
-
-        return date;
     }
 
     public static Date newDate(int year, int month, int dayOfMonth) {

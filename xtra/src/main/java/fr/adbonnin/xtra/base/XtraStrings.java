@@ -98,5 +98,23 @@ public final class XtraStrings {
         return str.substring(0, end);
     }
 
+    public static boolean containsIgnoreCase(String str, String search) {
+
+        if (str == null || search == null) {
+            return false;
+        }
+
+        final int len = search.length();
+        final int max = str.length() - len;
+
+        for (int i = 0; i <= max; i++) {
+            if (str.regionMatches(true, i, search, 0, len)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private XtraStrings() { /* Cannot be instantiated */ }
 }

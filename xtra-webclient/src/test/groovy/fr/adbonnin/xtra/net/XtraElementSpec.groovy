@@ -4,7 +4,7 @@ import org.jsoup.Jsoup
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class XtraHtmlSpec extends Specification {
+class XtraElementSpec extends Specification {
 
     @Unroll
     def "should tranform '#html' to lines '#expectedLines'"() {
@@ -12,7 +12,7 @@ class XtraHtmlSpec extends Specification {
         def element = Jsoup.parse(html)
 
         expect:
-        XtraHtml.lines(element) == expectedLines
+        XtraElement.lines(element) == expectedLines
 
         where:
         html                       || expectedLines

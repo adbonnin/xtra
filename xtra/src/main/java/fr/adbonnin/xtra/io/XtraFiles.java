@@ -170,6 +170,22 @@ public final class XtraFiles {
         }
     }
 
+    public static void createDir(File dir) throws IOException {
+        if (dir.exists()) {
+            if (!dir.isDirectory()) {
+                throw new IOException("File exists but is not a directory; directory: " + tryCanonicalPath(dir));
+            }
+        }
+        else {
+            if (!dir.mkdirs()) {
+                // Double-check that the directory wasn't created.
+                if (!dir.isDirectory()) {
+                    throw new IOException("Unable to create directory; directory: " + tryCanonicalPath(dir));
+                }
+            }
+        }
+    }
+
     public static File getCurrentDir() {
         return new File(".");
     }

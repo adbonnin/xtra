@@ -12,5 +12,9 @@ final class XtraIteratorsExtension {
         return XtraIterators.join(iterable, separator)
     }
 
+    static <T> String next(Iterator<? extends T> iterator, T defaultValue) {
+        return XtraIterators.getNext(iterator, defaultValue)
+    }
+
     private XtraIteratorsExtension() { /* Cannot be instantiated */ }
 }

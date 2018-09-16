@@ -1,12 +1,12 @@
 package fr.adbonnin.xtra.groovy.net
 
-import fr.adbonnin.xtra.net.XtraHtml
+import fr.adbonnin.xtra.net.XtraElement
 import org.jsoup.nodes.Element
 
-final class XtraHtmlExtension {
+final class XtraElementExtension {
 
     static String lines(Element element) {
-        return XtraHtml.lines(element)
+        return XtraElement.lines(element)
     }
 
     static String absUrl(Element element) {
@@ -25,4 +25,6 @@ final class XtraHtmlExtension {
     static Element firstChild(Element element) {
         return element.children().first()
     }
+
+    private XtraElementExtension() { /* Cannot be instantiated */ }
 }

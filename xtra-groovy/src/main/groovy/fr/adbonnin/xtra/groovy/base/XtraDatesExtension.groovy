@@ -8,6 +8,10 @@ final class XtraDatesExtension {
         return XtraDates.format(date, XtraDates.DATE_PATTERN)
     }
 
+    static Calendar toCalendar(Date date) {
+        return XtraDates.toCalendar(date)
+    }
+
     static int getYear(Calendar calendar) {
         return calendar.get(Calendar.YEAR)
     }

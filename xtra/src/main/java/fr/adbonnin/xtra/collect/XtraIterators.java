@@ -57,5 +57,9 @@ public final class XtraIterators {
         return iterable != null && addAll(addTo, iterable.iterator());
     }
 
+    public static <T> T getNext(Iterator<? extends T> iterator, T defaultValue) {
+        return iterator.hasNext() ? iterator.next() : defaultValue;
+    }
+
     private XtraIterators() { /* Cannot be instantiated */ }
 }

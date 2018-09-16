@@ -9,12 +9,6 @@ public final class XtraObjects {
 
     public static final String NULL_DEFAULT = "null";
 
-    public static void requireNonNull(Object... array) {
-        for (Object element : array) {
-            Objects.requireNonNull(element);
-        }
-    }
-
     /**
      * Create a copy of {@code array} or throw a {@code java.lang.NullPointerException} if an element is {@code null}.
      */

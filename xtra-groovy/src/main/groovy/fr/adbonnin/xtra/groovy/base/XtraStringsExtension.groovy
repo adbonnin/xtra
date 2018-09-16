@@ -32,5 +32,13 @@ final class XtraStringsExtension {
         return XtraStrings.removeAfter(str, search)
     }
 
+    static boolean containsIgnoreCase(String str, String search) {
+        return XtraStrings.containsIgnoreCase(str, search)
+    }
+
+    static boolean conains(String str, String search, boolean ignoreCase) {
+        return ignoreCase ? containsIgnoreCase(str, search) : str.contains(search)
+    }
+
     private XtraStringsExtension() { /* Cannot be instantiated */ }
 }

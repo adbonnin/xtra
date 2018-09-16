@@ -66,7 +66,12 @@ public final class XtraHttp {
 
     public static URL encodeUrl(URL url) {
         try {
-            final String escaped = url.toExternalForm().replaceAll(" ", "%20");
+            final String escaped = url.toExternalForm()
+                .replace(" ", "%20")
+                .replace("[", "%5B")
+                .replace("]", "%5D")
+                .replace("\"", "%22");
+
             final URI uri = new URI(escaped);
             return new URL(uri.toASCIIString());
         }

@@ -6,7 +6,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.NodeTraversor;
 import org.jsoup.select.NodeVisitor;
 
-public final class XtraHtml {
+public final class XtraElement {
 
     public static String lines(Element element) {
         final LinesNodeVisitor visitor = new LinesNodeVisitor();
@@ -52,5 +52,5 @@ public final class XtraHtml {
         }
     }
 
-    private XtraHtml() { /* Cannot be instantiated */ }
+    private XtraElement() { /* Cannot be instantiated */ }
 }

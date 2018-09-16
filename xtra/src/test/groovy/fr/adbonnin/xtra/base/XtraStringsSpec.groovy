@@ -54,4 +54,20 @@ class XtraStringsSpec extends Specification {
         'bar' | 'barr' | null        || 'bar'    | 'bar'
         'bar' | 'b'    | 'foo'       || 'fooar'  | 'fooar'
     }
+
+    @Unroll
+    def "should check that '#str' #labelExpectedContains '#search' by ignoring case"() {
+        expect:
+        XtraStrings.containsIgnoreCase(str, search) == expectedContains
+
+        where:
+        str   | search || expectedContains
+        'abc' | 'b'    || true
+        'abc' | 'A'    || true
+        'ABC' | 'c'    || true
+        'b'   | 'abc'  || false
+        'abc' | 'def'  || false
+
+        labelExpectedContains = expectedContains ? 'contains' : 'not contains'
+    }
 }

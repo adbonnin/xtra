@@ -16,5 +16,9 @@ final class XtraFilesExtension {
         return XtraFiles.tryCanonicalPath(file, nullDefault)
     }
 
+    static void createDir(File dir) {
+        XtraFiles.createDir(dir)
+    }
+
     private XtraFilesExtension() { /* Cannot be instantiated */ }
 }
