@@ -27,15 +27,17 @@ public final class XtraHtml {
         @Override
         public void head(Node node, int depth) {
             if (node instanceof TextNode) {
-                TextNode textNode = (TextNode) node;
-                String text = textNode.text().replace('\u00A0', ' ').trim();
+                final TextNode textNode = (TextNode) node;
+
+                final String text = textNode.text().replace('\u00A0', ' ').trim();
                 if (!text.isEmpty()) {
                     buffer.append(text);
                     isNewline = false;
                 }
             }
             else if (node instanceof Element) {
-                Element element = (Element) node;
+                final Element element = (Element) node;
+
                 if (!isNewline) {
                     if ((element.isBlock() || element.tagName().equals("br"))) {
                         buffer.append("\n");

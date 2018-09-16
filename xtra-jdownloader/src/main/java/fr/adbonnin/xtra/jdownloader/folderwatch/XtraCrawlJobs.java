@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.adbonnin.xtra.io.XtraFiles;
 
 import java.io.*;
-import java.nio.file.Files;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static fr.adbonnin.xtra.io.XtraCloseables.closeQuietly;
