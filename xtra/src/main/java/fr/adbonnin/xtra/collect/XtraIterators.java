@@ -2,8 +2,10 @@ package fr.adbonnin.xtra.collect;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 import static fr.adbonnin.xtra.base.XtraStrings.EMPTY;
+import static java.util.Collections.emptyIterator;
 
 public final class XtraIterators {
 
@@ -55,6 +57,44 @@ public final class XtraIterators {
 
     public static <T> boolean addAll(Collection<T> addTo, Iterable<? extends T> iterable) {
         return iterable != null && addAll(addTo, iterable.iterator());
+    }
+
+    public static <K, V> void putAll(Map<K, V> putTo, Iterator<Map.Entry<? extends K, ? extends V>> iterator) {
+
+        if (putTo == null || iterator == null) {
+            return;
+        }
+
+        while (iterator.hasNext()) {
+            final Map.Entry<? extends K, ? extends V> next = iterator.next();
+            putTo.put(next.getKey(), next.getValue());
+        }
+    }
+
+    public static <V> Iterator<V> asValuesIterator(final Iterator<? extends Map.Entry<?, ? extends V>> iterator) {
+
+        if (iterator == null) {
+            return emptyIterator();
+        }
+
+        return new Iterator<V>() {
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public V next() {
+                final Map.Entry<?, ? extends V> next = iterator.next();
+                return next == null ? null : next.getValue();
+            }
+
+            @Override
+            public void remove() {
+                iterator.remove();
+            }
+        };
     }
 
     public static <T> T getNext(Iterator<? extends T> iterator, T defaultValue) {
