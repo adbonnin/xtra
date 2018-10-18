@@ -28,7 +28,7 @@ public final class XtraDates {
     }
 
     public static Date parse(String str, String pattern) {
-        return parse(str, pattern, null, null);
+        return parse(str, pattern, getDefaultFormatLocale(), null);
     }
 
     public static Date parse(String str, String pattern, Locale locale) {
@@ -36,7 +36,7 @@ public final class XtraDates {
     }
 
     public static Date parse(String str, String pattern, Date defaultDate) {
-        return parse(str, pattern, null, defaultDate);
+        return parse(str, pattern, getDefaultFormatLocale(), defaultDate);
     }
 
     public static Date parse(String str, String pattern, Locale locale, Date defaultDate) {
@@ -62,15 +62,10 @@ public final class XtraDates {
     }
 
     public static Date newDate(String str, String pattern) {
-        return newDate(str, pattern, null);
+        return newDate(str, pattern, getDefaultFormatLocale());
     }
 
     public static Date newDate(String str, String pattern, Locale locale) {
-
-        if (locale == null) {
-            locale = getDefaultFormatLocale();
-        }
-
         try {
             return new SimpleDateFormat(pattern, locale).parse(str);
         }
