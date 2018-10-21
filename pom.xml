@@ -31,8 +31,10 @@
         <groovy.version>2.4.10</groovy.version>
         <cglib.version>3.2.6</cglib.version>
         <objenesis.version>2.6</objenesis.version>
+
         <gmaven-plugin.version>1.5</gmaven-plugin.version>
         <surefire-plugin.version>2.20.1</surefire-plugin.version>
+        <jarjar-maven-plugin.version>1.9</jarjar-maven-plugin.version>
 
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
@@ -108,4 +110,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>jarjar-maven-plugin</artifactId>
+                    <version>${jarjar-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
