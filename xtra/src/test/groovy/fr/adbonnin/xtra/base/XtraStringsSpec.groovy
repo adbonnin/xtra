@@ -70,4 +70,57 @@ class XtraStringsSpec extends Specification {
 
         labelExpectedContains = expectedContains ? 'contains' : 'not contains'
     }
+
+    @Unroll
+    def "should find in '#str' first index of '#search' at #expectedIndex"() {
+        when:
+        def index = XtraStrings.indexOf(str, search)
+
+        then:
+        index == expectedIndex
+
+        where:
+        str   | search || expectedIndex
+        null  | "a"    || -1
+        "a"   | null   || -1
+        "abc" | "b"    || 1
+    }
+
+    @Unroll
+    def "should remove before#labelInclude '#search' in '#str' to '#expectedStr'"() {
+        when:
+        def result = XtraStrings.removeBefore(str, search, include)
+
+        then:
+        result == expectedStr
+
+        where:
+        str   | search | include || expectedStr
+        null  | 'a'    | false   || null
+        'a'   | null   | false   || 'a'
+        'a'   | 'b'    | false   || 'a'
+        'abc' | 'b'    | true    || 'c'
+        'abc' | 'b'    | false   || 'bc'
+
+        labelInclude = include ? ' and include' : ''
+    }
+
+    @Unroll
+    def "should remove#labelInclude after '#search' in '#str' to '#expectedStr'"() {
+        when:
+        def result = XtraStrings.removeAfter(str, search, include)
+
+        then:
+        result == expectedStr
+
+        where:
+        str   | search | include || expectedStr
+        null  | 'a'    | false   || null
+        'a'   | null   | false   || 'a'
+        'a'   | 'b'    | false   || 'a'
+        'abc' | 'b'    | true    || 'a'
+        'abc' | 'b'    | false   || 'ab'
+
+        labelInclude = include ? ' and include' : ''
+    }
 }

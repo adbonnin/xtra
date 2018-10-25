@@ -24,12 +24,12 @@ final class XtraStringsExtension {
         return XtraStrings.replaceStart(str, search, replacement, ignoreCase)
     }
 
-    static String removeBefore(String str, String search, boolean include) {
+    static String removeBefore(String str, String search, boolean include = false) {
         return XtraStrings.removeBefore(str, search, include)
     }
 
-    static String removeAfter(String str, String search) {
-        return XtraStrings.removeAfter(str, search)
+    static String removeAfter(String str, String search, boolean include = false) {
+        return XtraStrings.removeAfter(str, search, include )
     }
 
     static boolean containsIgnoreCase(String str, String search) {

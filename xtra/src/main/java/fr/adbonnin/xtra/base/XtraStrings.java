@@ -4,6 +4,8 @@ public final class XtraStrings {
 
     public static final String EMPTY = "";
 
+    public static final int INDEX_NOT_FOUND = -1;
+
     public static boolean isEmpty(CharSequence str) {
         return str == null || str.length() == 0;
     }
@@ -72,30 +74,26 @@ public final class XtraStrings {
 
     public static String removeBefore(String str, String search, boolean include) {
 
-        if (isEmpty(str) || isEmpty(search)) {
+        final int index = indexOf(str, search);
+        if (index == INDEX_NOT_FOUND) {
             return str;
         }
 
-        final int start = str.indexOf(search);
-        if (start == -1) {
-            return str;
-        }
-
-        return str.substring(start + (include ? search.length() : 0));
+        return str.substring(index + (include ? search.length() : 0));
     }
 
-    public static String removeAfter(String str, String search) {
+    public static String removeAfter(String str, String search, boolean include) {
 
-        if (isEmpty(str) || isEmpty(search)) {
+        final int index = indexOf(str, search);
+        if (index == INDEX_NOT_FOUND) {
             return str;
         }
 
-        final int end = str.indexOf(search);
-        if (end == -1) {
-            return str;
-        }
+        return str.substring(0, index + (include ? 0 : search.length()));
+    }
 
-        return str.substring(0, end);
+    public static int indexOf(String str, String search) {
+        return str == null || search == null ? INDEX_NOT_FOUND : str.indexOf(search);
     }
 
     public static boolean containsIgnoreCase(String str, String search) {
