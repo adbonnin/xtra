@@ -1,11 +1,14 @@
 package fr.adbonnin.xtra.collect;
 
+import fr.adbonnin.xtra.base.Function;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
 import static fr.adbonnin.xtra.base.XtraStrings.EMPTY;
 import static java.util.Collections.emptyIterator;
+import static java.util.Objects.requireNonNull;
 
 public final class XtraIterators {
 
@@ -69,6 +72,29 @@ public final class XtraIterators {
             final Map.Entry<? extends K, ? extends V> next = iterator.next();
             putTo.put(next.getKey(), next.getValue());
         }
+    }
+
+    public static <F, T> Iterator<T> transform(final Iterator<F> iterator,
+                                               final Function<? super F, ? extends T> function) {
+        requireNonNull(iterator);
+        requireNonNull(function);
+        return new Iterator<T>() {
+
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return function.apply(iterator.next());
+            }
+
+            @Override
+            public void remove() {
+                iterator.remove();
+            }
+        };
     }
 
     public static <V> Iterator<V> asValuesIterator(final Iterator<? extends Map.Entry<?, ? extends V>> iterator) {

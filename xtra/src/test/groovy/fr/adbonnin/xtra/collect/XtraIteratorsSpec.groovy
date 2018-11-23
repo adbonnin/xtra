@@ -19,4 +19,15 @@ class XtraIteratorsSpec extends Specification {
         labelIterable = iterable.toString()
         labelSeparator = separator != _ ? separator : 'every separator'
     }
+
+    void "should transform an iterator"() {
+        given:
+        def iterable = [1, 2, 3]
+
+        when:
+        def transformed = XtraIterators.transform(iterable.iterator()) { it * 2 }
+
+        then:
+        transformed.toList() == [2, 4, 6]
+    }
 }

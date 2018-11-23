@@ -34,5 +34,16 @@ public final class XtraObjects {
         }
     }
 
+    public static void require(boolean expression) {
+        if (!expression) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static String requireNotEmpty(String str) {
+        require(XtraStrings.isNotEmpty(str));
+        return str;
+    }
+
     private XtraObjects() { /* Cannot be instantiated */ }
 }

@@ -10,6 +10,10 @@ public final class XtraStrings {
         return str == null || str.length() == 0;
     }
 
+    public static boolean isNotEmpty(CharSequence str) {
+        return !isEmpty(str);
+    }
+
     public static String removeEnd(String str, String search, boolean ignoreCase) {
         return replaceEnd(str, search, null, ignoreCase);
     }

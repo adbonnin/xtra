@@ -4,4 +4,5 @@ moduleVersion = 1.0
 extensionClasses = \
   fr.adbonnin.xtra.groovy.net.XtraElementExtension, \
   fr.adbonnin.xtra.groovy.net.XtraElementsExtension, \
+  fr.adbonnin.xtra.groovy.net.XtraUriBuilderExtension, \
   fr.adbonnin.xtra.groovy.webclient.XtraHttpClientExtension

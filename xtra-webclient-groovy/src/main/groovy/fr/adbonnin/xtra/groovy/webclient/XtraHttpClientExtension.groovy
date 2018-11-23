@@ -24,6 +24,10 @@ final class XtraHttpClientExtension {
         return httpClient.execute(request, responseHandler)
     }
 
+    static File downloadFile(HttpClient httpClient, String url, File file) {
+        return downloadFile(httpClient, newEncodedHttpGet(url), file, RedownloadMode.OVERWRITE_EXISTING_FILE)
+    }
+
     static File downloadFile(HttpClient httpClient, String url, File file, RedownloadMode redownloadMode) {
         return downloadFile(httpClient, newEncodedHttpGet(url), file, redownloadMode)
     }

@@ -3,6 +3,7 @@ moduleVersion = 1.0
 
 extensionClasses = \
   fr.adbonnin.xtra.groovy.base.XtraDatesExtension, \
+  fr.adbonnin.xtra.groovy.base.XtraNumberExtension, \
   fr.adbonnin.xtra.groovy.base.XtraStringsExtension, \
   fr.adbonnin.xtra.groovy.collect.XtraCollectionExtension, \
   fr.adbonnin.xtra.groovy.collect.XtraIteratorsExtension, \

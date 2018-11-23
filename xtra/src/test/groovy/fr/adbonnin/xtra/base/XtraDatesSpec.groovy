@@ -76,4 +76,28 @@ class XtraDatesSpec extends Specification {
         month = Calendar.JANUARY
         dayOfMonth = 1
     }
+
+    def "should create new date with time"() {
+        when:
+        def date = XtraDates.newDate(year, month, dayOfMonth, hourOfDay, minute, second)
+
+        def cal = Calendar.getInstance()
+        cal.setTime(date)
+
+        then:
+        cal.get(Calendar.YEAR) == year
+        cal.get(Calendar.MONTH) == month
+        cal.get(Calendar.DAY_OF_MONTH) == dayOfMonth
+        cal.get(Calendar.HOUR_OF_DAY) == hourOfDay
+        cal.get(Calendar.MINUTE) == minute
+        cal.get(Calendar.SECOND) == second
+
+        where:
+        year = 2018
+        month = Calendar.JANUARY
+        dayOfMonth = 1
+        hourOfDay = 8
+        minute = 36
+        second = 42
+    }
 }

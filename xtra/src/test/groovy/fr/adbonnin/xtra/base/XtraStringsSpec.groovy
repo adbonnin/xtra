@@ -6,7 +6,7 @@ import spock.lang.Unroll
 class XtraStringsSpec extends Specification {
 
     @Unroll
-    def "should eval #str to #expectedLabel"() {
+    def "should indicate that '#str' is empty to #expected"() {
         expect:
         XtraStrings.isEmpty(str) == expected
 
@@ -15,8 +15,18 @@ class XtraStringsSpec extends Specification {
         null  || true
         ''    || true
         'foo' || false
+    }
 
-        expectedLabel = expected ? 'empty' : 'not empty'
+    @Unroll
+    void "should indicate that '#str' is not empty to #expected"() {
+        expect:
+        XtraStrings.isNotEmpty(str) == expected
+
+        where:
+        str   || expected
+        null  || false
+        ''    || false
+        'foo' || true
     }
 
     def "should replace end"() {

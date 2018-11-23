@@ -11,5 +11,9 @@ public final class XtraList {
         return set;
     }
 
+    public static <T> ArrayList<T> newArrayList(Iterable<T> iterable) {
+        return newArrayList(iterable.iterator());
+    }
+
     private XtraList() { /* Cannot be instantiated */ }
 }

@@ -76,13 +76,13 @@
                 <version>${jsoup.version}</version>
             </dependency>
 
+			<!-- Test dependencies -->
             <dependency>
                 <groupId>org.spockframework</groupId>
                 <artifactId>spock-core</artifactId>
                 <version>${spock.version}</version>
             </dependency>
-
-            <!-- Test dependencies -->
+            
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

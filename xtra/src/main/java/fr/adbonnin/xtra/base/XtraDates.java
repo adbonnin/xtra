@@ -81,6 +81,10 @@ public final class XtraDates {
         return new GregorianCalendar(year, month, dayOfMonth).getTime();
     }
 
+    public static Date newDate(int year, int month, int dayOfMonth, int hourOfDay, int minute, int second) {
+        return new GregorianCalendar(year, month, dayOfMonth, hourOfDay, minute, second).getTime();
+    }
+
     public static Calendar toCalendar(long time) {
         final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
