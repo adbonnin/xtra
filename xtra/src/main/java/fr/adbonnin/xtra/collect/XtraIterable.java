@@ -1,6 +1,7 @@
 package fr.adbonnin.xtra.collect;
 
 import fr.adbonnin.xtra.base.Function;
+import fr.adbonnin.xtra.predicate.Predicate;
 
 import java.util.Iterator;
 
@@ -16,6 +17,18 @@ public final class XtraIterable {
             @Override
             public Iterator<T> iterator() {
                 return XtraIterators.transform(iterable.iterator(), function);
+            }
+        };
+    }
+
+    public static <T> Iterable<T> filter(final Iterable<T> iterable,
+                                         final Predicate<? super T> predicate) {
+        requireNonNull(iterable);
+        requireNonNull(predicate);
+        return new Iterable<T>() {
+            @Override
+            public Iterator<T> iterator() {
+                return XtraIterators.filter(iterable.iterator(), predicate);
             }
         };
     }

@@ -30,4 +30,15 @@ class XtraIteratorsSpec extends Specification {
         then:
         transformed.toList() == [2, 4, 6]
     }
+
+    void "should filter an interator"() {
+        given:
+        def iterable = [1, 2, 3]
+
+        when:
+        def filtered = XtraIterators.filter(iterable.iterator()) { it != 2 }
+
+        then:
+        filtered.toList() == [1, 3]
+    }
 }

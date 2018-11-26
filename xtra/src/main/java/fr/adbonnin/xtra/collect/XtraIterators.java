@@ -1,6 +1,7 @@
 package fr.adbonnin.xtra.collect;
 
 import fr.adbonnin.xtra.base.Function;
+import fr.adbonnin.xtra.predicate.Predicate;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -93,6 +94,23 @@ public final class XtraIterators {
             @Override
             public void remove() {
                 iterator.remove();
+            }
+        };
+    }
+
+    public static <T> Iterator<T> filter(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
+        requireNonNull(iterator);
+        requireNonNull(predicate);
+        return new AbstractIterator<T>() {
+            @Override
+            protected T computeNext() {
+                while (iterator.hasNext()) {
+                    final T next = iterator.next();
+                    if (predicate.evaluate(next)) {
+                        return next;
+                    }
+                }
+                return endOfData();
             }
         };
     }
