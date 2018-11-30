@@ -27,5 +27,33 @@ public final class XtraNumber {
         }
     }
 
+    public static Integer toIntegerObject(String str, Integer defaultValue) {
+
+        if (str == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Integer.valueOf(str.trim());
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    public static Float toFloatObject(String str, Float defaultValue) {
+
+        if (str == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Float.valueOf(str.trim());
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
     private XtraNumber() { /* Cannot be instantiated */ }
 }

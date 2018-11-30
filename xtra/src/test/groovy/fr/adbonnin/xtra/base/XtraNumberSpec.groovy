@@ -53,4 +53,26 @@ class XtraNumberSpec extends Specification {
         1000    | '1000th'
         1000000 | '1000000th'
     }
+
+    void "should parse to Integer"() {
+        expect:
+        XtraNumber.toIntegerObject(str, defaultValue) == expectedValue
+
+        where:
+        str   | defaultValue || expectedValue
+        null  | 2            || 2
+        " 3 " | 2            || 3
+        "a"   | 4            || 4
+    }
+
+    void "should parse to Float"() {
+        expect:
+        XtraNumber.toFloatObject(str, defaultValue) == expectedValue
+
+        where:
+        str     | defaultValue || expectedValue
+        null    | 2.2f         || 2.2f
+        " 3.3 " | 2.2f         || 3.3f
+        "a"     | 4.4f         || 4.4f
+    }
 }
