@@ -45,5 +45,10 @@ public final class XtraObjects {
         return str;
     }
 
+    public static String requireNotEmpty(String str, String messahe) {
+        require(XtraStrings.isNotEmpty(str), messahe);
+        return str;
+    }
+
     private XtraObjects() { /* Cannot be instantiated */ }
 }
