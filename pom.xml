@@ -28,7 +28,7 @@
         <httpclient.version>4.5.6</httpclient.version>
         <jsoup.version>1.11.3</jsoup.version>
 
-        <bukkit.version>1.12.2-R0.1-SNAPSHOT</bukkit.version>
+        <bukkit.version>1.13.2-R0.1-SNAPSHOT</bukkit.version>
         <picocli.version>3.8.0</picocli.version>
 
         <junit.version>4.10</junit.version>

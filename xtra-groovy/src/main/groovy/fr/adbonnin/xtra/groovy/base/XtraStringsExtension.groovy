@@ -1,11 +1,20 @@
 package fr.adbonnin.xtra.groovy.base
 
+import fr.adbonnin.xtra.base.XtraDates
 import fr.adbonnin.xtra.base.XtraStrings
 
 final class XtraStringsExtension {
 
     static boolean isEmpty(CharSequence str) {
         return XtraStrings.isEmpty(str)
+    }
+
+    static Date toDate(String str, String pattern, Locale locale) {
+        return XtraDates.newDate(str, pattern, locale)
+    }
+
+    static Date toDate(String str, String pattern) {
+        return XtraDates.newDate(str, pattern)
     }
 
     static String removeEnd(String str, String search, boolean ignoreCase) {
