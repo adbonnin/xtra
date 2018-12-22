@@ -87,6 +87,12 @@ public final class XtraFiles {
         return new File(parent, cleanedFilename);
     }
 
+    public static File toCleanedFile(File file) {
+        final String filename = file.getName();
+        final String cleanedFilename = XtraFiles.cleanFilename(filename);
+        return filename.equals(cleanedFilename) ? file : new File(file.getParent(), cleanedFilename);
+    }
+
     /**
      * Remove reserved and illegals file name characters from {@code name}.
      *

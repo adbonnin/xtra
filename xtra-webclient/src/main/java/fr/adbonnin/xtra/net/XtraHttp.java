@@ -68,9 +68,10 @@ public final class XtraHttp {
         try {
             final String escaped = url.toExternalForm()
                 .replace(" ", "%20")
+                .replace("\"", "%22")
                 .replace("[", "%5B")
                 .replace("]", "%5D")
-                .replace("\"", "%22");
+                .replace("`", "%60");
 
             final URI uri = new URI(escaped);
             return new URL(uri.toASCIIString());

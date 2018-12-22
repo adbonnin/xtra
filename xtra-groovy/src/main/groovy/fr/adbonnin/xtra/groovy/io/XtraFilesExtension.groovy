@@ -20,5 +20,9 @@ final class XtraFilesExtension {
         XtraFiles.createDir(dir)
     }
 
+    static File toCleanedFile(File file) {
+        return XtraFiles.toCleanedFile(file)
+    }
+
     private XtraFilesExtension() { /* Cannot be instantiated */ }
 }

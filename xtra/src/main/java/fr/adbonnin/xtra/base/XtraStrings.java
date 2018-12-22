@@ -20,13 +20,24 @@ public final class XtraStrings {
 
     public static String replaceEnd(String str, String search, String replacement, boolean ignoreCase) {
 
-        if (isEmpty(str) || isEmpty(search)) {
+        final int removeIndex = lastIndexOf(str, search, ignoreCase);
+        if (removeIndex == INDEX_NOT_FOUND) {
             return str;
+        }
+
+        final String sub = str.substring(0, removeIndex);
+        return isEmpty(replacement) ? sub : sub + replacement;
+    }
+
+    public static int lastIndexOf(String str, String search, boolean ignoreCase) {
+
+        if (isEmpty(str) || isEmpty(search)) {
+            return INDEX_NOT_FOUND;
         }
 
         final int removeIndex = str.length() - search.length();
         if (removeIndex < 0) {
-            return str;
+            return INDEX_NOT_FOUND;
         }
 
         final boolean endsWith;
@@ -37,12 +48,7 @@ public final class XtraStrings {
             endsWith = str.startsWith(search, removeIndex);
         }
 
-        if (!endsWith) {
-            return str;
-        }
-
-        final String sub = str.substring(0, removeIndex);
-        return isEmpty(replacement) ? sub : sub + replacement;
+        return endsWith ? removeIndex : INDEX_NOT_FOUND;
     }
 
     public static String removeStart(String str, String search, boolean ignoreCase) {
@@ -51,13 +57,24 @@ public final class XtraStrings {
 
     public static String replaceStart(String str, String search, String replacement, boolean ignoreCase) {
 
-        if (isEmpty(str) || isEmpty(search)) {
+        final int removeLength = indexOf(str, search, ignoreCase);
+        if (removeLength == INDEX_NOT_FOUND) {
             return str;
+        }
+
+        final String sub = str.substring(removeLength);
+        return isEmpty(replacement) ? sub : replacement + sub;
+    }
+
+    public static int indexOf(String str, String search, boolean ignoreCase) {
+
+        if (isEmpty(str) || isEmpty(search)) {
+            return INDEX_NOT_FOUND;
         }
 
         final int removeLength = search.length();
         if (str.length() < removeLength) {
-            return str;
+            return INDEX_NOT_FOUND;
         }
 
         final boolean startsWith;
@@ -68,12 +85,7 @@ public final class XtraStrings {
             startsWith = str.startsWith(search);
         }
 
-        if (!startsWith) {
-            return str;
-        }
-
-        final String sub = str.substring(removeLength);
-        return isEmpty(replacement) ? sub : replacement + sub;
+        return startsWith ? removeLength : INDEX_NOT_FOUND;
     }
 
     public static String removeBefore(String str, String search, boolean include) {

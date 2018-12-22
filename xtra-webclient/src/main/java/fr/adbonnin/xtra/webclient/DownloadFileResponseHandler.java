@@ -56,7 +56,7 @@ public class DownloadFileResponseHandler implements ResponseHandler<File> {
     }
 
     public static DownloadFileResponseHandler downloadToDir(URI uri, File dir, String defaultEmptyFilename, RedownloadMode redownloadMode) {
-        final File file = XtraResources.newDownloadFile(uri, dir, defaultEmptyFilename);
-        return new DownloadFileResponseHandler(file, redownloadMode);
+        final String filename = XtraResources.toFilename(uri, defaultEmptyFilename);
+        return new DownloadFileResponseHandler(new File(dir, filename), redownloadMode);
     }
 }

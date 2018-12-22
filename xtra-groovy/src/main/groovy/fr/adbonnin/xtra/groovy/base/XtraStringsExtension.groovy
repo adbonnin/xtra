@@ -29,12 +29,20 @@ final class XtraStringsExtension {
         return XtraStrings.removeStart(str, search, ignoreCase)
     }
 
+    static int lastIndexOf(String str, String search, boolean ignoreCase) {
+        return XtraStrings.lastIndexOf(str, search, ignoreCase)
+    }
+
     static String replaceStart(String str, String search, String replacement, boolean ignoreCase) {
         return XtraStrings.replaceStart(str, search, replacement, ignoreCase)
     }
 
     static String removeBefore(String str, String search, boolean include = false) {
         return XtraStrings.removeBefore(str, search, include)
+    }
+
+    static int indexOf(String str, String search, boolean ignoreCase) {
+        return XtraStrings.indexOf(str, search, ignoreCase)
     }
 
     static String removeAfter(String str, String search, boolean include = false) {

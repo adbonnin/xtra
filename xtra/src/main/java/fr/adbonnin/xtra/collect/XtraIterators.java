@@ -6,6 +6,7 @@ import fr.adbonnin.xtra.predicate.Predicate;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import static fr.adbonnin.xtra.base.XtraStrings.EMPTY;
 import static java.util.Collections.emptyIterator;
@@ -137,6 +138,31 @@ public final class XtraIterators {
             @Override
             public void remove() {
                 iterator.remove();
+            }
+        };
+    }
+
+    public static <T> Iterator<T> singletonIterator(final T value) {
+        return new Iterator<T>() {
+            private boolean hasNext = true;
+
+            @Override
+            public boolean hasNext() {
+                return hasNext;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext) {
+                    throw new NoSuchElementException();
+                }
+                hasNext = false;
+                return value;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
             }
         };
     }

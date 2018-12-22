@@ -5,12 +5,9 @@ import spock.lang.Specification
 
 class XtraResourcesSpec extends Specification {
 
-    @Shared
-    def dir = new File('dir')
-
     def "uriResourceName"() {
         expect:
-        XtraResources.uriResourceName(new URI(uri)) == expected
+        XtraResources.toUriResourceName(new URI(uri)) == expected
 
         where:
         uri                  || expected
@@ -22,13 +19,13 @@ class XtraResourcesSpec extends Specification {
 
     def "newDownloadFile: "() {
         expect:
-        XtraResources.newDownloadFile(new URI(uri), dir, emptyDefault) == expected
+        XtraResources.toFilename(new URI(uri), emptyDefault) == expected
 
         where:
         uri               | emptyDefault || expected
-        'http://foo/bar'  | null         || new File(dir, 'bar')
-        'http://foo/bar/' | null         || dir
-        'http://foo'      | null         || dir
-        'http://foo/:'    | 'bar'        || new File(dir, 'bar')
+        'http://foo/abc'  | null         || 'abc'
+        'http://foo/abc/' | 'def'        || 'def'
+        'http://foo'      | 'def'        || 'def'
+        'http://foo/:'    | 'bar'        || 'bar'
     }
 }

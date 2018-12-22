@@ -9,21 +9,16 @@ public final class XtraResources {
 
     public static final char PATH_SEPARATOR = '/';
 
-    public static String uriResourceName(URI uri) {
+    public static String toUriResourceName(URI uri) {
         final String path = uri.getPath();
         final int index = path.lastIndexOf(PATH_SEPARATOR);
         return path.substring(index + 1);
     }
 
-    public static File newDownloadFile(URI uri, File dir, String defaultEmptyFilename) {
-
-        final String uriFilename = uriResourceName(uri);
-        if (uriFilename.isEmpty()) {
-            return dir;
-        }
-
+    public static String toFilename(URI uri, String defaultEmptyFilename) {
+        final String uriFilename = toUriResourceName(uri);
         final String filename = XtraFiles.cleanFilename(uriFilename);
-        return new File(dir, filename.isEmpty() ? defaultEmptyFilename : filename);
+        return filename.isEmpty() ? defaultEmptyFilename : filename;
     }
 
     private XtraResources() { /* Cannot be instantiated */ }
