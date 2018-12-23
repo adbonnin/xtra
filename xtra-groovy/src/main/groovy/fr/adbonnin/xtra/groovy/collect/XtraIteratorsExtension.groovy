@@ -15,7 +15,7 @@ final class XtraIteratorsExtension {
     }
 
     static <T> String next(Iterator<? extends T> iterator, T defaultValue) {
-        return XtraIterators.getNext(iterator, defaultValue)
+        return XtraIterators.next(iterator, defaultValue)
     }
 
     static <F, T> Iterator<T> transform(final Iterator<F> iterator,

@@ -1,6 +1,6 @@
 package fr.adbonnin.xtra.base;
 
-public interface Function<F, T> {
+public interface Function<T, S> {
 
-    T apply(F input);
+    S apply(T value);
 }

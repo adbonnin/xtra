@@ -8,7 +8,7 @@ import org.apache.http.client.ResponseHandler;
 import java.io.*;
 import java.net.URI;
 
-import static fr.adbonnin.xtra.io.XtraCloseables.closeQuietly;
+import static fr.adbonnin.xtra.io.XtraIO.closeQuietly;
 import static java.util.Objects.requireNonNull;
 
 public class DownloadFileResponseHandler implements ResponseHandler<File> {

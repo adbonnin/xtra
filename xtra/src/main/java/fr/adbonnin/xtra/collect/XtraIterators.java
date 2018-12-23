@@ -1,6 +1,7 @@
 package fr.adbonnin.xtra.collect;
 
 import fr.adbonnin.xtra.base.Function;
+import fr.adbonnin.xtra.base.XtraNumber;
 import fr.adbonnin.xtra.predicate.Predicate;
 
 import java.util.Collection;
@@ -167,8 +168,24 @@ public final class XtraIterators {
         };
     }
 
-    public static <T> T getNext(Iterator<? extends T> iterator, T defaultValue) {
+    public static <T> T next(Iterator<? extends T> iterator, T defaultValue) {
         return iterator.hasNext() ? iterator.next() : defaultValue;
+    }
+
+    public static int nextAsInt(Iterator<? extends String> iterator, int defaultValue) {
+        return iterator.hasNext() ? XtraNumber.asInt(iterator.next(), defaultValue) : defaultValue;
+    }
+
+    public static long nextAsLong(Iterator<? extends String> iterator, long defaultValue) {
+        return iterator.hasNext() ? XtraNumber.asLong(iterator.next(), defaultValue) : defaultValue;
+    }
+
+    public static float nextAsFloat(Iterator<? extends String> iterator, float defaultValue) {
+        return iterator.hasNext() ? XtraNumber.asFloat(iterator.next(), defaultValue) : defaultValue;
+    }
+
+    public static double nextAsDouble(Iterator<? extends String> iterator, double defaultValue) {
+        return iterator.hasNext() ? XtraNumber.asDouble(iterator.next(), defaultValue) : defaultValue;
     }
 
     private XtraIterators() { /* Cannot be instantiated */ }

@@ -27,7 +27,11 @@ public final class XtraNumber {
         }
     }
 
-    public static Integer toIntegerObject(String str, Integer defaultValue) {
+    public static String removeOrdinal(String str) {
+        return str.replaceAll("(?<=\\d)(st|nd|rd|th)", "");
+    }
+
+    public static int asInt(String str, int defaultValue) {
 
         if (str == null) {
             return defaultValue;
@@ -41,7 +45,21 @@ public final class XtraNumber {
         }
     }
 
-    public static Float toFloatObject(String str, Float defaultValue) {
+    public static long asLong(String str, long defaultValue) {
+
+        if (str == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Long.valueOf(str);
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    public static float asFloat(String str, float defaultValue) {
 
         if (str == null) {
             return defaultValue;
@@ -49,6 +67,20 @@ public final class XtraNumber {
 
         try {
             return Float.valueOf(str.trim());
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    public static double asDouble(String str, double defaultValue) {
+
+        if (str == null) {
+            return defaultValue;
+        }
+
+        try {
+            return Double.valueOf(str.trim());
         }
         catch (NumberFormatException e) {
             return defaultValue;

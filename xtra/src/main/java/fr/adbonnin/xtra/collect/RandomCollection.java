@@ -4,17 +4,11 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeMap;
 
-public class RandomCollection<T> implements Iterator<T> {
+public class RandomCollection<T> implements Iterable<T> {
 
     private final TreeMap<Double, T> map = new TreeMap<>();
 
-    private final Random random;
-
     private double total = 0;
-
-    public RandomCollection(Random random) {
-        this.random = random;
-    }
 
     public RandomCollection add(double weight, T element) {
         if (weight > 0) {
@@ -24,19 +18,32 @@ public class RandomCollection<T> implements Iterator<T> {
         return this;
     }
 
-    @Override
-    public boolean hasNext() {
-        return !map.isEmpty();
-    }
-
-    @Override
-    public T next() {
+    public T get(Random random) {
         double value = random.nextDouble() * total;
         return map.higherEntry(value).getValue();
     }
 
     @Override
-    public void remove() {
-        throw new UnsupportedOperationException();
+    public Iterator<T> iterator() {
+        return iterator(new Random());
+    }
+
+    public Iterator<T> iterator(final Random random) {
+        return new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                return !map.isEmpty();
+            }
+
+            @Override
+            public T next() {
+                return RandomCollection.this.get(random);
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 }

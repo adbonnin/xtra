@@ -6,7 +6,7 @@ import fr.adbonnin.xtra.io.XtraFiles;
 import java.io.*;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
-import static fr.adbonnin.xtra.io.XtraCloseables.closeQuietly;
+import static fr.adbonnin.xtra.io.XtraIO.closeQuietly;
 import static fr.adbonnin.xtra.io.XtraFiles.EXTENSION_SEPARATOR;
 import static java.nio.charset.StandardCharsets.UTF_8;
 

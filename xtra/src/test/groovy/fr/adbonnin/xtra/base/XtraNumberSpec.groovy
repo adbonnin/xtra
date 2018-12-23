@@ -54,9 +54,24 @@ class XtraNumberSpec extends Specification {
         1000000 | '1000000th'
     }
 
+    @Unroll
+    void "should remove ordinal from #str to #expected"() {
+        expect:
+        expected == XtraNumber.removeOrdinal(str)
+
+        where:
+        str     || expected
+        "1st"   || "1"
+        "2nd"   || "2"
+        "3rd"   || "3"
+        "4th"   || "4"
+        "st"    || "st"
+        "2stnd" || "2nd"
+    }
+
     void "should parse to Integer"() {
         expect:
-        XtraNumber.toIntegerObject(str, defaultValue) == expectedValue
+        XtraNumber.asInt(str, defaultValue) == expectedValue
 
         where:
         str   | defaultValue || expectedValue
@@ -67,7 +82,7 @@ class XtraNumberSpec extends Specification {
 
     void "should parse to Float"() {
         expect:
-        XtraNumber.toFloatObject(str, defaultValue) == expectedValue
+        XtraNumber.asFloat(str, defaultValue) == expectedValue
 
         where:
         str     | defaultValue || expectedValue
