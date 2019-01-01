@@ -33,5 +33,29 @@ public final class XtraIterable {
         };
     }
 
+    private static <T> Iterator<Iterator<? extends T>> iterators(final Iterable<? extends Iterable<? extends T>> iterables) {
+        final Iterator<? extends Iterable<? extends T>> itr = iterables.iterator();
+
+        return new AbstractIterator<Iterator<? extends T>>() {
+
+            @Override
+            protected Iterator<? extends T> computeNext() {
+                return itr.hasNext() ? itr.next().iterator() : this.endOfData();
+            }
+        };
+    }
+
+    public static <T> Iterable<T> concat(final Iterable<? extends Iterable<? extends T>> iterables) {
+        requireNonNull(iterables);
+
+        return new Iterable<T>() {
+
+            @Override
+            public Iterator<T> iterator() {
+                return XtraIterators.concat(iterators(iterables));
+            }
+        };
+    }
+
     private XtraIterable() { /* Cannot be instantiated */ }
 }

@@ -25,7 +25,7 @@ class RandomCollectionSpec extends Specification {
         randomItr.hasNext()
     }
 
-    void "should return random object"() {
+    void "should create random object"() {
         given:
         def random = Mock(Random) {
             2 * nextDouble() >> 0.1
@@ -34,25 +34,52 @@ class RandomCollectionSpec extends Specification {
         }
 
         def randomCollection = new RandomCollection()
-            .add(20, 'A')
-            .add(30, 'B')
-            .add(50, 'C')
+            .add('A', 20)
+            .add('B', 30)
+            .add('C', 50)
 
-        def randomIr = randomCollection.iterator(random)
+        def randomItr = randomCollection.iterator(random)
 
         expect:
         randomCollection.get(random) == 'A'
-        randomIr.hasNext()
-        randomIr.next() == 'A'
+        randomItr.hasNext()
+        randomItr.next() == 'A'
 
         and:
         randomCollection.get(random) == 'B'
-        randomIr.hasNext()
-        randomIr.next() == 'B'
+        randomItr.hasNext()
+        randomItr.next() == 'B'
 
         and:
         randomCollection.get(random) == 'C'
-        randomIr.hasNext()
-        randomIr.next() == 'C'
+        randomItr.hasNext()
+        randomItr.next() == 'C'
+    }
+
+    void "should create random object from iterator"() {
+        given:
+        def random = Mock(Random) {
+            2 * nextDouble() >> 0.1
+            2 * nextDouble() >> 0.4
+            2 * nextDouble() >> 0.6
+        }
+
+        def randomCollection = new RandomCollection().addAll(['A': 20, 'B': 30, 'C': 50].iterator())
+        def randomItr = randomCollection.iterator(random)
+
+        expect:
+        randomCollection.get(random) == 'A'
+        randomItr.hasNext()
+        randomItr.next() == 'A'
+
+        and:
+        randomCollection.get(random) == 'B'
+        randomItr.hasNext()
+        randomItr.next() == 'B'
+
+        and:
+        randomCollection.get(random) == 'C'
+        randomItr.hasNext()
+        randomItr.next() == 'C'
     }
 }

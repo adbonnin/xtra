@@ -1,5 +1,6 @@
 package fr.adbonnin.xtra.bukkit.yaml;
 
+import fr.adbonnin.xtra.bukkit.yaml.node.*;
 import fr.adbonnin.xtra.io.XtraIO;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -30,6 +31,9 @@ public final class XtraYaml {
     public static YamlNode toYamlNode(Object obj) {
         if (obj == null) {
             return NullNode.instance;
+        }
+        else if (obj instanceof Boolean) {
+            return new BooleanNode((Boolean) obj);
         }
         else if (obj instanceof Integer) {
             return new IntNode((Integer) obj);

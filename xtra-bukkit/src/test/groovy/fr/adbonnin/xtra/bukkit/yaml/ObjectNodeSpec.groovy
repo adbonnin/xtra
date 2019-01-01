@@ -1,12 +1,14 @@
 package fr.adbonnin.xtra.bukkit.yaml
 
+import fr.adbonnin.xtra.bukkit.yaml.node.IntNode
+import fr.adbonnin.xtra.bukkit.yaml.node.ObjectNode
 import spock.lang.Specification
 
 class ObjectNodeSpec extends Specification {
 
     void "should get fields"() {
         when:
-        def obj = XtraYaml.read(yaml)
+        def obj = XtraYaml.read(yaml) as ObjectNode
 
         then:
         obj.size() == expected.size()
@@ -15,10 +17,10 @@ class ObjectNodeSpec extends Specification {
         !obj.isArray()
         obj.isObject()
 
-        obj.get(0) == null
-        obj.get('a') == new IntNode(1)
+        obj.path(0) == new IntNode(1)
+        obj.has(0)
 
-        !obj.has(0)
+        obj.path('a') == new IntNode(1)
         obj.has('a')
 
         obj.iterator().toList() == expected.values().toList()

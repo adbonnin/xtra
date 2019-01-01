@@ -17,18 +17,6 @@ class XtraStringsSpec extends Specification {
         'foo' || false
     }
 
-    @Unroll
-    void "should indicate that '#str' is not empty to #expected"() {
-        expect:
-        XtraStrings.isNotEmpty(str) == expected
-
-        where:
-        str   || expected
-        null  || false
-        ''    || false
-        'foo' || true
-    }
-
     def "should replace end"() {
         expect:
         XtraStrings.replaceEnd(str, (String) search, (String) replacement, false) == expected

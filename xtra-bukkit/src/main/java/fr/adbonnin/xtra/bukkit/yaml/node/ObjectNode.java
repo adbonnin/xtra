@@ -1,5 +1,8 @@
-package fr.adbonnin.xtra.bukkit.yaml;
+package fr.adbonnin.xtra.bukkit.yaml.node;
 
+import fr.adbonnin.xtra.bukkit.yaml.XtraYaml;
+import fr.adbonnin.xtra.bukkit.yaml.YamlNode;
+import fr.adbonnin.xtra.collect.XtraIterators;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.AbstractMap;
@@ -29,24 +32,35 @@ public class ObjectNode extends ContainerNode {
     }
 
     //=========================================================
+    // General type coercions
+    //=========================================================
+
+    @Override
+    public boolean asBoolean(String fieldName, boolean defaultValue) {
+        return path(fieldName).asBoolean(defaultValue);
+    }
+
+    @Override
+    public int asInt(String fieldName, int defaultValue) {
+        return path(fieldName).asInt(defaultValue);
+    }
+
+    @Override
+    public double asDouble(String fieldName, double defaultValue) {
+        return path(fieldName).asDouble(fieldName, defaultValue);
+    }
+
+    //=========================================================
     // Navigation methods
     //=========================================================
 
-    public YamlNode get(int index) {
-        return null;
-    }
-
-    public YamlNode get(String fieldName) {
-        final Object value = section.get(fieldName);
-        return XtraYaml.toYamlNode(value);
+    @Override
+    public YamlNode path(int index) {
+        return XtraIterators.get(iterator(), index, MissingNode.getInstance());
     }
 
     public boolean has(int index) {
-        return get(index) != null;
-    }
-
-    public boolean has(String fieldName) {
-        return get(fieldName) != null;
+        return index < size();
     }
 
     @Override
@@ -68,6 +82,21 @@ public class ObjectNode extends ContainerNode {
                 throw new UnsupportedOperationException();
             }
         };
+    }
+
+    @Override
+    public YamlNode path(String fieldName) {
+
+        if (!section.contains(fieldName, true)) {
+            return MissingNode.getInstance();
+        }
+
+        final Object value = section.get(fieldName);
+        return XtraYaml.toYamlNode(value);
+    }
+
+    public boolean has(String fieldName) {
+        return this.path(fieldName) != null;
     }
 
     public Iterator<String> fieldNames() {

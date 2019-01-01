@@ -41,7 +41,7 @@ public final class XtraObjects {
     }
 
     public static String requireNotEmpty(String str) {
-        require(XtraStrings.isNotEmpty(str));
+        require(!XtraStrings.isEmpty(str));
         return str;
     }
 

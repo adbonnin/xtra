@@ -65,7 +65,7 @@ public final class XtraIterators {
         return iterable != null && addAll(addTo, iterable.iterator());
     }
 
-    public static <K, V> void putAll(Map<K, V> putTo, Iterator<Map.Entry<? extends K, ? extends V>> iterator) {
+    public static <K, V> void putAll(Map<K, V> putTo, Iterator<? extends Map.Entry<? extends K, ? extends V>> iterator) {
 
         if (putTo == null || iterator == null) {
             return;
@@ -117,6 +117,20 @@ public final class XtraIterators {
         };
     }
 
+    public static <T> T find(Iterator<? extends T> iterator, Predicate<? super T> predicate, T defaultValue) {
+        requireNonNull(iterator);
+        requireNonNull(predicate);
+
+        while (iterator.hasNext()) {
+            final T next = iterator.next();
+            if (predicate.evaluate(next)) {
+                return next;
+            }
+        }
+
+        return defaultValue;
+    }
+
     public static <V> Iterator<V> asValuesIterator(final Iterator<? extends Map.Entry<?, ? extends V>> iterator) {
 
         if (iterator == null) {
@@ -143,7 +157,7 @@ public final class XtraIterators {
         };
     }
 
-    public static <T> Iterator<T> singletonIterator(final T value) {
+    public static <T> Iterator<T> asIterator(final T value) {
         return new Iterator<T>() {
             private boolean hasNext = true;
 
@@ -168,6 +182,34 @@ public final class XtraIterators {
         };
     }
 
+    public static <T> Iterator<T> concat(final Iterator<? extends Iterator<? extends T>> iterators) {
+        requireNonNull(iterators);
+
+        if (!iterators.hasNext()) {
+            return emptyIterator();
+        }
+
+        return new AbstractIterator<T>() {
+
+            private Iterator<? extends T> current = iterators.next();
+
+            @Override
+            protected T computeNext() {
+                for (;;) {
+                    if (current.hasNext()) {
+                        return current.next();
+                    }
+                    else if (iterators.hasNext()) {
+                        current = iterators.next();
+                    }
+                    else {
+                        return endOfData();
+                    }
+                }
+            }
+        };
+    }
+
     public static <T> T next(Iterator<? extends T> iterator, T defaultValue) {
         return iterator.hasNext() ? iterator.next() : defaultValue;
     }
@@ -186,6 +228,49 @@ public final class XtraIterators {
 
     public static double nextAsDouble(Iterator<? extends String> iterator, double defaultValue) {
         return iterator.hasNext() ? XtraNumber.asDouble(iterator.next(), defaultValue) : defaultValue;
+    }
+
+    public static <T> Iterator<T> unmodifiableIterator(final Iterator<T> iterator) {
+
+        if (iterator == null) {
+            return null;
+        }
+
+        return new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public T next() {
+                return iterator.next();
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
+    public static int advance(Iterator<?> iterator, int steps) {
+
+        if (iterator == null || steps <= 0) {
+            return 0;
+        }
+
+        int count;
+        for (count = 0; count < steps && iterator.hasNext(); count++) {
+            iterator.next();
+        }
+
+        return count;
+    }
+
+    public static <T> T get(Iterator<? extends T> iterator, int index, T defaultValue) {
+        advance(iterator, index);
+        return next(iterator, defaultValue);
     }
 
     private XtraIterators() { /* Cannot be instantiated */ }

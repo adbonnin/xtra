@@ -10,10 +10,6 @@ public final class XtraStrings {
         return str == null || str.length() == 0;
     }
 
-    public static boolean isNotEmpty(CharSequence str) {
-        return !isEmpty(str);
-    }
-
     public static String removeEnd(String str, String search, boolean ignoreCase) {
         return replaceEnd(str, search, null, ignoreCase);
     }
@@ -130,7 +126,7 @@ public final class XtraStrings {
         return false;
     }
 
-    public  static boolean equals(CharSequence cs1, CharSequence cs2) {
+    public static boolean equals(CharSequence cs1, CharSequence cs2) {
 
         if (cs1 == cs2) {
             return true;
@@ -152,6 +148,38 @@ public final class XtraStrings {
         }
 
         return true;
+    }
+
+    public static String leftPad(String str, int size) {
+        return leftPad(str, size, ' ');
+    }
+
+    public static String leftPad(String str, int size, char padChar) {
+
+        if (str == null) {
+            return null;
+        }
+
+        final int pads = size - str.length();
+        if (pads <= 0) {
+            return str;
+        }
+
+        return repeat(padChar, pads).concat(str);
+    }
+
+    public static String repeat(char ch, int repeat) {
+
+        if (repeat <= 0) {
+            return EMPTY;
+        }
+
+        final char[] buf = new char[repeat];
+        for (int i = 0; i < repeat; i++) {
+            buf[i] = ch;
+        }
+
+        return new String(buf);
     }
 
     private XtraStrings() { /* Cannot be instantiated */ }

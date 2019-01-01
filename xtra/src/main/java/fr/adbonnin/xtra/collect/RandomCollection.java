@@ -1,6 +1,7 @@
 package fr.adbonnin.xtra.collect;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -10,7 +11,7 @@ public class RandomCollection<T> implements Iterable<T> {
 
     private double total = 0;
 
-    public RandomCollection add(double weight, T element) {
+    public RandomCollection add(T element, double weight) {
         if (weight > 0) {
             total += weight;
             map.put(total, element);
@@ -18,9 +19,21 @@ public class RandomCollection<T> implements Iterable<T> {
         return this;
     }
 
+    public RandomCollection addAll(Iterator<? extends Map.Entry<? extends T, ? extends Number>> iterator) {
+        while (iterator.hasNext()) {
+            final Map.Entry<? extends T, ? extends Number> next = iterator.next();
+            add(next.getKey(), next.getValue().doubleValue());
+        }
+        return this;
+    }
+
     public T get(Random random) {
         double value = random.nextDouble() * total;
         return map.higherEntry(value).getValue();
+    }
+
+    public Iterator<T> values() {
+        return XtraIterators.unmodifiableIterator(map.values().iterator());
     }
 
     @Override

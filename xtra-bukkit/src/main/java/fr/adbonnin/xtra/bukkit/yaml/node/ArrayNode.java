@@ -1,4 +1,7 @@
-package fr.adbonnin.xtra.bukkit.yaml;
+package fr.adbonnin.xtra.bukkit.yaml.node;
+
+import fr.adbonnin.xtra.bukkit.yaml.XtraYaml;
+import fr.adbonnin.xtra.bukkit.yaml.YamlNode;
 
 import java.util.Iterator;
 import java.util.List;
@@ -34,14 +37,13 @@ public class ArrayNode extends ContainerNode {
     //=========================================================
 
     @Override
-    public YamlNode get(int index) {
+    public YamlNode path(int index) {
         final Object value = list.get(index);
         return XtraYaml.toYamlNode(value);
     }
 
-    @Override
-    public YamlNode get(String fieldName) {
-        return null;
+    public boolean has(int index) {
+        return index < list.size();
     }
 
     @Override
@@ -64,5 +66,10 @@ public class ArrayNode extends ContainerNode {
                 throw new UnsupportedOperationException();
             }
         };
+    }
+
+    @Override
+    public YamlNode path(String fieldName) {
+        return MissingNode.getInstance();
     }
 }

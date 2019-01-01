@@ -1,4 +1,4 @@
-package fr.adbonnin.xtra.bukkit.yaml;
+package fr.adbonnin.xtra.bukkit.yaml.node;
 
 public class IntNode extends ValueNode {
 
@@ -21,6 +21,12 @@ public class IntNode extends ValueNode {
     // General type coercions
     //=========================================================
 
+    @Override
+    public int asInt(int defaultValue) {
+        return intValue();
+    }
+
+    @Override
     public double asDouble(double defaultValue) {
         return intValue();
     }

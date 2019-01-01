@@ -59,6 +59,10 @@ public class ReaderSplitter extends AbstractIterator<String> {
         }
     }
 
+    public String next(String defaultValue) {
+        return XtraIterators.next(this, defaultValue);
+    }
+
     public int nextAsInt(int defaultValue) {
         return XtraIterators.nextAsInt(this, defaultValue);
     }

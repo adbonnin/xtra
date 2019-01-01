@@ -1,4 +1,4 @@
-package fr.adbonnin.xtra.bukkit.yaml;
+package fr.adbonnin.xtra.bukkit.yaml.node;
 
 import fr.adbonnin.xtra.base.XtraNumber;
 
